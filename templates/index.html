@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section text-center fade-in">
+    <h1 class="hero-title">Welcome to App.IO</h1>
+    <p class="hero-subtitle">The modern way to manage your life securely.</p>
+    <div class="hero-actions">
+        <a href="{{ url_for('signup') }}" class="btn btn-primary btn-large">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary btn-large">Log In</a>
+    </div>
+</div>
+{% endblock %}
