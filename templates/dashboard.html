@@ -1,36 +1,87 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="dashboard-wrapper fade-in">
-    <div class="dashboard-header glass">
-        <h1 class="dashboard-title">Welcome, {{ user.name }}!</h1>
-        <p class="dashboard-subtitle">Here is your profile information.</p>
-    </div>
+{% block title %}Bosh sahifa{% endblock %}
 
-    <div class="profile-card glass mt-4">
-        <div class="profile-header">
-            {% if user.profile_pic %}
-                <img src="{{ user.profile_pic }}" alt="Profile Picture" class="profile-img">
-            {% else %}
-                <div class="profile-img-placeholder">{{ user.name[0] }}</div>
-            {% endif %}
-            <div class="profile-info">
-                <h3>{{ user.name }}</h3>
-                <p class="text-muted">{{ user.email }}</p>
-                <span class="badge badge-primary">Authorized via {{ user.auth_provider | title }}</span>
-            </div>
-        </div>
-        
-        <div class="profile-details mt-4">
-            <div class="detail-group">
-                <label>User ID</label>
-                <div class="detail-value">#{{ user.id }}</div>
-            </div>
-            <div class="detail-group">
-                <label>Account Created</label>
-                <div class="detail-value">{{ user.created_at.strftime('%Y-%m-%d %H:%M') if user.created_at else 'Unknown' }}</div>
-            </div>
-        </div>
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h1>Xush kelibsiz, <span class="gradient-text">{{ current_user.username }}</span>!</h1>
+    <p>Qanday yordam bera olaman?</p>
+</div>
+
+<div class="stats-row fade-in" style="animation-delay: 0.1s;">
+    <div class="card stat-card">
+        <div class="stat-value">{{ current_user.total_score }}</div>
+        <div class="stat-label">Umumiy Ball</div>
     </div>
+    <div class="card stat-card">
+        <div class="stat-value">{{ current_user.typing_best_wpm }}</div>
+        <div class="stat-label">Eng tez yozish (WPM)</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value">{{ current_user.tictactoe_wins }}</div>
+        <div class="stat-label">Krestik-Nolik Yutuq</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value">{{ current_user.test_wins }}</div>
+        <div class="stat-label">Test Jang Yutuq</div>
+    </div>
+</div>
+
+<h2 class="section-title fade-in" style="animation-delay: 0.2s;">Asosiy imkoniyatlar</h2>
+
+<div class="card-grid fade-in" style="animation-delay: 0.3s;">
+    <a href="{{ url_for('chat') }}" class="card feature-card">
+        <div class="card-icon chat">🤖</div>
+        <h3 class="card-title">AI Chat</h3>
+        <p class="card-desc">Sizning aqlli yordamchingiz. Savollarga javob bering, maslahat oling.</p>
+    </a>
+
+    <a href="{{ url_for('messenger') }}" class="card feature-card">
+        <div class="card-icon messenger">💬</div>
+        <h3 class="card-title">Messenger</h3>
+        <p class="card-desc">Boshqa foydalanuvchilar bilan onlayn suhbatlashing.</p>
+    </a>
+
+    <a href="{{ url_for('speedtype') }}" class="card feature-card">
+        <div class="card-icon type">⌨️</div>
+        <h3 class="card-title">Tez yozish</h3>
+        <p class="card-desc">Turli matnlarni yozib o'z tezligingizni oshiring.</p>
+    </a>
+
+    <a href="{{ url_for('homework') }}" class="card feature-card">
+        <div class="card-icon homework">📚</div>
+        <h3 class="card-title">Vazifaga yordam</h3>
+        <p class="card-desc">Uy vazifalari bo'yicha yordam oling va tushuntirish so'rang.</p>
+    </a>
+
+    <a href="{{ url_for('testgen') }}" class="card feature-card">
+        <div class="card-icon test">📝</div>
+        <h3 class="card-title">Test generator</h3>
+        <p class="card-desc">Istagan mavzuyingiz bo'yicha bilimingizni sinash uchun testlar oling.</p>
+    </a>
+
+    <a href="{{ url_for('konspekt') }}" class="card feature-card">
+        <div class="card-icon konspekt">📖</div>
+        <h3 class="card-title">Konspekt yaratuvchi</h3>
+        <p class="card-desc">Kerakli mavzuda konspekt va ma'ruza matnlari generatsiya qiling.</p>
+    </a>
+
+    <a href="{{ url_for('tictactoe') }}" class="card feature-card">
+        <div class="card-icon ttt">🎮</div>
+        <h3 class="card-title">Krestik-nolik</h3>
+        <p class="card-desc">Botga yoki haqiqiy raqibga qarshi o'ynang.</p>
+    </a>
+
+    <a href="{{ url_for('testbattle') }}" class="card feature-card">
+        <div class="card-icon battle">⚔️</div>
+        <h3 class="card-title">Test Jang</h3>
+        <p class="card-desc">Do'stlaringiz bilan onlayn test ishlab bellashing.</p>
+    </a>
+
+    <a href="{{ url_for('leaderboard') }}" class="card feature-card">
+        <div class="card-icon leader">🏆</div>
+        <h3 class="card-title">Reyting</h3>
+        <p class="card-desc">Eng kuchli foydalanuvchilar reytingini ko'ring.</p>
+    </a>
 </div>
 {% endblock %}
