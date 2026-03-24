@@ -6,51 +6,31 @@
         <h2 class="auth-title">Create Account</h2>
         <p class="auth-subtitle">Join us to get started.</p>
         
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
         <form method="POST" action="">
-            {{ form.hidden_tag() }}
             <div class="input-group">
-                {{ form.name.label(class="input-label") }}
-                {{ form.name(class="input-field", placeholder="Enter your full name") }}
-                {% for error in form.name.errors %}
-                    <span class="error-text">{{ error }}</span>
-                {% endfor %}
+                <label class="input-label">Username</label>
+                <input type="text" name="username" class="input-field" placeholder="Choose a username" required>
             </div>
             <div class="input-group">
-                {{ form.email.label(class="input-label") }}
-                {{ form.email(class="input-field", placeholder="Enter your email") }}
-                {% for error in form.email.errors %}
-                    <span class="error-text">{{ error }}</span>
-                {% endfor %}
+                <label class="input-label">Password</label>
+                <input type="password" name="password" class="input-field" placeholder="Create a password" required>
             </div>
             <div class="input-group">
-                {{ form.password.label(class="input-label") }}
-                {{ form.password(class="input-field", placeholder="Create a password") }}
-                {% for error in form.password.errors %}
-                    <span class="error-text">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="input-group">
-                {{ form.confirm_password.label(class="input-label") }}
-                {{ form.confirm_password(class="input-field", placeholder="Confirm your password") }}
-                {% for error in form.confirm_password.errors %}
-                    <span class="error-text">{{ error }}</span>
-                {% endfor %}
+                <label class="input-label">Confirm Password</label>
+                <input type="password" name="password2" class="input-field" placeholder="Confirm your password" required>
             </div>
             <div class="form-actions">
-                {{ form.submit(class="btn btn-primary btn-full") }}
+                <button type="submit" class="btn btn-primary btn-full">Sign up</button>
             </div>
         </form>
-
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-        <div class="social-login">
-            <a href="{{ url_for('google_login') }}" class="btn btn-outline btn-full google-btn">
-                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="google-icon">
-                Sign up with Google
-            </a>
-        </div>
         
         <p class="auth-footer">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
     </div>
